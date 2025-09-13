@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
             height: 100vh;
             background-color: #f4f4f4;
         }
+
         .container {
             background: white;
             padding: 20px;
@@ -22,7 +24,9 @@
             text-align: center;
             width: 50%;
         }
-        input, textarea {
+
+        input,
+        textarea {
             display: block;
             width: 100%;
             padding: 10px;
@@ -30,6 +34,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         button {
             background-color: #007bff;
             color: white;
@@ -38,28 +43,31 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .comments {
             margin-top: 20px;
             text-align: left;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Deixe um comentário</h2>
-        <form action="/comment" method="POST">
-            <textarea name="content" required></textarea>
-            <button type="submit">Enviar</button>
-        </form>
+        <form action="/comment" method="POST"> <textarea name="content" required></textarea> <button
+                type="submit">Enviar</button> </form>
         <div class="comments">
             <h3>Comentários:</h3>
-            <% comments.forEach(comment => { %>
-                <p><%- comment.content %></p> <!-- VULNERÁVEL A XSS -->
-            <% }); %>
+            <% comments.forEach(comment=> { %> <p>
+                    <%= comment.content %>
+                </p> <!-- agora é escapado -->
+                <% }); %>
         </div>
     </div>
 </body>
+
 </html>
